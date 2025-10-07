@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula: Git & GitHub Essencial</title>
+    <style>
+        :root {
+            --cor-primaria: #f05033; /* Laranja Git */
+            --cor-fundo: #f3f3f3;
+            --cor-texto: #333;
+            --cor-slide-fundo: #fff;
+            --cor-codigo-fundo: #2d2d2d;
+            --cor-codigo-texto: #f2f2f2;
+            --font-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: var(--cor-fundo); font-family: var(--font-principal); color: var(--cor-texto); }
+        .presentation { position: relative; width: 100%; height: 100%; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; box-sizing: border-box; background-color: var(--cor-slide-fundo); opacity: 0; visibility: hidden; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s; text-align: center; }
+        .slide.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .slide h1 { font-size: 3.5em; color: var(--cor-primaria); margin-bottom: 20px; }
+        .slide h2 { font-size: 2.5em; color: #555; margin: 0 0 40px 0; border-bottom: 3px solid var(--cor-primaria); padding-bottom: 10px; }
+        .slide p, .slide li { font-size: 1.5em; line-height: 1.6; max-width: 900px; }
+        .slide ul { list-style: none; padding: 0; text-align: left; }
+        .slide ul li { position: relative; padding-left: 30px; margin-bottom: 15px; }
+        .slide ul li::before { content: '✓'; position: absolute; left: 0; color: var(--cor-primaria); font-weight: bold; }
+        .slide-title h1 { font-size: 4.5em; }
+        .slide-title h2 { font-size: 2em; border: none; color: #666; }
+        pre { background-color: var(--cor-codigo-fundo); color: var(--cor-codigo-texto); padding: 20px; border-radius: 8px; font-family: 'Consolas', 'Monaco', monospace; font-size: 1.2em; text-align: left; width: 90%; max-width: 900px; overflow-x: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        pre.command-line::before { content: '$ '; color: #888; }
+        code .comment { color: #6a9955; }
+        .progress-bar { position: fixed; bottom: 0; left: 0; height: 8px; background-color: var(--cor-primaria); transition: width 0.3s ease; }
+    </style>
+</head>
+<body>
+
+    <div class="presentation">
+
+        <div class="slide active slide-title">
+            <h1>Git & GitHub Essencial</h1>
+            <h2>O Guia Prático de 30 Minutos</h2>
+        </div>
+
+        <div class="slide">
+            <h2>O que é Git?</h2>
+            <p>É um <strong>Sistema de Controle de Versão</strong>. Pense nele como "pontos de salvamento" (<em>save points</em>) superpoderosos para o seu código.</p>
+            <p><strong>Analogia:</strong> O histórico de versões do Google Docs, mas no seu computador e para qualquer tipo de arquivo.</p>
+        </div>
+
+        <div class="slide">
+            <h2>O que é GitHub?</h2>
+            <p>É uma <strong>plataforma online</strong> para hospedar seus repositórios Git.</p>
+            <p><strong>Analogia:</strong> Se o Git é o software que escreve o livro, o GitHub é a biblioteca online onde você guarda, compartilha e colabora nos seus livros.</p>
+        </div>
+        
+        <div class="slide">
+            <h2>Configuração Inicial (Faça uma vez)</h2>
+            <p>Antes de tudo, apresente-se ao Git. Abra seu terminal e digite:</p>
+            <pre class="command-line"><code>git config --global user.name "Seu Nome"</code></pre>
+            <pre class="command-line"><code>git config --global user.email "seu.email@exemplo.com"</code></pre>
+            <p>Isso identifica você em todos os seus commits.</p>
+        </div>
+
+        <div class="slide">
+            <h2>Passo 1: Iniciando um Repositório</h2>
+            <p>Para começar a versionar um projeto, use o comando <code>git init</code>.</p>
+            <pre class="command-line"><code><span class="comment"># Crie uma pasta para o projeto</span>
+mkdir meu-projeto
+cd meu-projeto
+
+<span class="comment"># Inicie o Git nela</span>
+git init</code></pre>
+            <p>Pronto! Uma pasta oculta <code>.git</code> foi criada para guardar todo o histórico.</p>
+        </div>
+
+        <div class="slide">
+            <h2>O Ciclo Básico: Add & Commit</h2>
+            <p>O fluxo de trabalho local tem 2 etapas principais:</p>
+            <ol>
+                <li><strong>git add:</strong> Adiciona arquivos na "área de preparação" (Staging Area).</li>
+                <li><strong>git commit:</strong> Salva permanentemente as mudanças que estão na Staging Area.</li>
+            </ol>
+            <p><strong>Analogia:</strong> `git add` é colocar as compras na esteira do caixa. `git commit` é pagar e levar o recibo.</p>
+        </div>
+        
+        <div class="slide">
+            <h2>Exemplo Prático: Primeiro Commit</h2>
+            <p>Dentro da pasta <code>meu-projeto</code>, vamos criar e salvar um arquivo.</p>
+            <pre class="command-line"><code><span class="comment"># Crie um arquivo HTML simples</span>
+echo "&lt;h1&gt;Meu Site&lt;/h1&gt;" &gt; index.html
+
+<span class="comment"># Adicione o arquivo à Staging Area</span>
+git add index.html
+
+<span class="comment"># Salve o commit com uma mensagem descritiva</span>
+git commit -m "Cria a página inicial do projeto"</code></pre>
+        </div>
+
+        <div class="slide">
+            <h2>Comandos Úteis: Status e Log</h2>
+            <p>Como saber o que está acontecendo?</p>
+            <p><code>git status</code>: Mostra quais arquivos foram modificados e o que está na Staging Area. <strong>Use o tempo todo!</strong></p>
+            <pre class="command-line"><code>git status</code></pre>
+            <p><code>git log</code>: Mostra o histórico de todos os commits feitos.</p>
+            <pre class="command-line"><code>git log --oneline</code></pre>
+        </div>
+        
+        <div class="slide">
+            <h2>Passo 2: Conectando com o GitHub</h2>
+            <p>Vamos enviar nosso projeto para o mundo!</p>
+            <ol>
+                <li>Vá para <strong>GitHub.com</strong> e crie um novo repositório (sem README ou .gitignore).</li>
+                <li>O GitHub te dará a URL do repositório. Use-a nos comandos abaixo.</li>
+            </ol>
+            <p>Isso conecta seu repositório local a um "controle remoto" chamado <code>origin</code>.</p>
+        </div>
+        
+        <div class="slide">
+            <h2>Enviando o Código: git push</h2>
+            <p>Execute estes comandos no seu terminal, substituindo a URL.</p>
+            <pre class="command-line"><code><span class="comment"># Conecta seu repositório local ao remoto (faça isso uma vez)</span>
+git remote add origin https://github.com/seu-usuario/meu-projeto.git
+
+<span class="comment"># (Opcional) Renomeia sua branch principal para 'main'</span>
+git branch -M main
+
+<span class="comment"># Envia seus commits para o GitHub</span>
+git push -u origin main</code></pre>
+            <p>Atualize a página do GitHub. Seus arquivos estarão lá!</p>
+        </div>
+
+        <div class="slide">
+            <h2>O Ciclo do Dia a Dia</h2>
+            <p>O fluxo de trabalho diário, sozinho ou em equipe, é:</p>
+            <ul>
+                <li><strong>git pull:</strong> Baixar as últimas alterações do GitHub.</li>
+                <li>... Fazer suas modificações no código ...</li>
+                <li><strong>git add:</strong> Adicionar seus arquivos modificados.</li>
+                <li><strong>git commit:</strong> Salvar suas alterações localmente.</li>
+                <li><strong>git push:</strong> Enviar suas alterações para o GitHub.</li>
+            </ul>
+        </div>
+        
+        <div class="slide">
+            <h2>Exemplo Prático: Recebendo Mudanças</h2>
+            <p>Vamos simular o trabalho de um colega.</p>
+            <ol>
+                <li>No site do GitHub, abra o arquivo `index.html` e edite-o (adicione um parágrafo, por exemplo). Salve a alteração.</li>
+                <li>Agora, no seu terminal, rode o comando abaixo para "puxar" a alteração:</li>
+            </ol>
+            <pre class="command-line"><code>git pull origin main</code></pre>
+            <p>Abra o arquivo `index.html` no seu computador. A mágica aconteceu!</p>
+        </div>
+        
+        <div class="slide">
+            <h2>O Poder dos Branches (Ramos)</h2>
+            <p>Branches são "universos paralelos" do seu projeto.</p>
+            <p>Eles permitem que você trabalhe em novas funcionalidades (ex: `feature-login`) sem quebrar a versão principal (`main`).</p>
+            <pre class="command-line"><code><span class="comment"># Cria um novo branch e muda para ele</span>
+git checkout -b nova-feature
+
+<span class="comment"># Para voltar ao branch principal</span>
+git checkout main</code></pre>
+        </div>
+        
+        <div class="slide">
+            <h2>Resumo Essencial</h2>
+            <ul>
+                <li><code>git init</code>: Inicia um repositório.</li>
+                <li><code>git status</code>: Verifica o estado atual.</li>
+                <li><code>git add [arquivo]</code>: Adiciona para a próxima "foto".</li>
+                <li><code>git commit -m "mensagem"</code>: Tira a "foto" (salva).</li>
+                <li><code>git push</code>: Envia suas "fotos" para o GitHub.</li>
+                <li><code>git pull</code>: Puxa as "fotos" mais recentes do GitHub.</li>
+                <li><code>git checkout -b [branch]</code>: Cria e muda para um novo ramo.</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h1>Perguntas?</h1>
+            <h2>Obrigado!</h2>
+        </div>
+
+    </div>
+
+    <div class="progress-bar"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const progressBar = document.querySelector('.progress-bar');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                if (slides[index]) {
+                    slides[index].classList.add('active');
+                }
+                const progress = ((index + 1) / slides.length) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+
+            function nextSlide() {
+                if (currentSlide < slides.length - 1) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            }
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowRight' || event.key === ' ') {
+                    nextSlide();
+                } else if (event.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(currentSlide);
+        });
+    </script>
+
+</body>
+</html>
