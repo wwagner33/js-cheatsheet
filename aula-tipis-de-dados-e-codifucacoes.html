@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armazenamento e Processamento de Dados</title>
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Container do Slider */
+        .slider-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Estilo do Slide */
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            padding: 40px;
+            box-sizing: border-box;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        .slide.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .slide.prev {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        /* Títulos e Conteúdo */
+        .slide h1 {
+            color: #0056b3;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .slide h2 {
+            color: #1a73e8;
+            font-size: 2.2rem;
+            border-bottom: 3px solid #1a73e8;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-around;
+            width: 90%;
+            text-align: left;
+        }
+
+        .column {
+            width: 48%;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 5px solid #1a73e8;
+        }
+
+        .column h3 {
+            color: #0056b3;
+            font-size: 1.5rem;
+            margin-top: 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        strong {
+            color: #0056b3;
+        }
+
+        code {
+            background-color: #e9ecef;
+            color: #c7254e;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Slide de Título */
+        .title-slide {
+            background: linear-gradient(45deg, #0056b3, #1a73e8);
+            color: white;
+        }
+
+        .title-slide h1 { color: white; }
+        .title-slide p { font-size: 1.5rem; }
+
+        /* Navegação */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 86, 179, 0.7);
+            color: white;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 50%;
+            z-index: 100;
+            user-select: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        #prev { left: 20px; }
+        #next { right: 20px; }
+        
+        /* Tabela de Comparação */
+        table {
+            width: 90%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #1a73e8;
+            color: white;
+            font-size: 1.2rem;
+        }
+        tbody tr:nth-child(odd) {
+            background-color: #f8f9fa;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+
+        <div class="slide title-slide active">
+            <h1>Armazenamento e Processamento de Dados</h1>
+            <p>Uma visão sobre inteiros, ponto flutuante, caracteres e strings</p>
+            <p style="margin-top: 50px; font-size: 1rem;">Use as setas do teclado para navegar</p>
+        </div>
+
+        <div class="slide">
+            <h2>Números Inteiros (<code>int</code>)</h2>
+            <div class="content">
+                <div class="column">
+                    <h3>💾 Armazenamento (Memória)</h3>
+                    <ul>
+                        <li><strong>Representação Binária:</strong> Armazenados diretamente em base 2. Ex: <code>13</code> se torna <code>1101</code>.</li>
+                        <li><strong>Tamanho Fixo:</strong> Geralmente 32 ou 64 bits.</li>
+                        <li><strong>Sinal:</strong> O primeiro bit indica o sinal (0 = positivo, 1 = negativo) usando a técnica de <strong>complemento de dois</strong>.</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>⚙️ Processamento (CPU)</h3>
+                    <ul>
+                        <li><strong>Unidade Central:</strong> A <strong>ULA</strong> (Unidade Lógica e Aritmética) é a especialista em inteiros.</li>
+                        <li><strong>Operações:</strong> Realiza cálculos aritméticos (soma, subtração) e lógicos (AND, OR) de forma extremamente rápida.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Ponto Flutuante (<code>float</code>, <code>double</code>)</h2>
+            <div class="content">
+                <div class="column">
+                    <h3>💾 Armazenamento (Memória)</h3>
+                    <ul>
+                        <li><strong>Padrão IEEE 754:</strong> Representa números reais dividindo os bits em 3 partes:</li>
+                        <li><strong>1. Sinal:</strong> (1 bit) Positivo ou negativo.</li>
+                        <li><strong>2. Expoente:</strong> Define a magnitude (escala) do número.</li>
+                        <li><strong>3. Mantissa:</strong> Armazena os dígitos significativos (a precisão).</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>⚙️ Processamento (CPU)</h3>
+                    <ul>
+                        <li><strong>Unidade Central:</strong> A <strong>FPU</strong> (Unidade de Ponto Flutuante) é uma parte especializada da CPU para estes cálculos.</li>
+                        <li><strong>Operações:</strong> Lida com a complexidade matemática de números reais, garantindo precisão nos resultados.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Caractere (<code>char</code>)</h2>
+            <div class="content">
+                <div class="column">
+                    <h3>💾 Armazenamento (Memória)</h3>
+                    <ul>
+                        <li><strong>Codificação Numérica:</strong> Um caractere é armazenado como um número inteiro.</li>
+                        <li><strong>Tabela de Mapeamento:</strong> O computador usa uma tabela (como ASCII ou UTF-8) para converter o número em um caractere visível.</li>
+                        <li><strong>Exemplo (ASCII):</strong> <code>'A'</code> é armazenado como o número <code>65</code> (<code>01000001</code> em binário).</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>⚙️ Processamento (CPU)</h3>
+                    <ul>
+                        <li><strong>Como Inteiros:</strong> Como são números pequenos, a <strong>ULA</strong> processa os caracteres.</li>
+                        <li><strong>Operações Comuns:</strong> Principalmente comparações para ordenação alfabética e verificação de igualdade.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide">
+            <h2>String (Cadeia de Caracteres)</h2>
+            <div class="content">
+                <div class="column">
+                    <h3>💾 Armazenamento (Memória)</h3>
+                    <ul>
+                        <li><strong>Sequência de Caracteres:</strong> É um vetor (array) de caracteres, armazenados em endereços de memória contíguos.</li>
+                        <li><strong>Exemplo:</strong> <code>"CASA"</code> é armazenado como os códigos para 'C', 'A', 'S', 'A'.</li>
+                        <li><strong>Terminador Nulo:</strong> Em linguagens como C, um caractere especial <code>\0</code> (valor 0) marca o fim da string.</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>⚙️ Processamento (CPU)</h3>
+                    <ul>
+                        <li><strong>Operações em Loop:</strong> O processamento é feito iterando sobre a sequência de caracteres.</li>
+                        <li><strong>Funções Comuns:</strong> Comparação, concatenação, busca e cópia são feitas caractere por caractere pela CPU.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Codificação: ASCII vs. UTF-8</h2>
+             <div class="content">
+                <div class="column">
+                    <h3>ASCII</h3>
+                    <ul>
+                        <li><strong>Tamanho:</strong> Usa 7 ou 8 bits (1 byte).</li>
+                        <li><strong>Capacidade:</strong> Representa 128 (ou 256) caracteres.</li>
+                        <li><strong>Conteúdo:</strong> Letras do alfabeto inglês, números e símbolos de pontuação.</li>
+                        <li><strong>Limitação:</strong> Não suporta acentos, cedilha, emojis ou caracteres de outros idiomas.</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>UTF-8 (Unicode)</h3>
+                    <ul>
+                        <li><strong>Tamanho:</strong> Variável, de <strong>1 a 4 bytes</strong> por caractere.</li>
+                        <li><strong>Capacidade:</strong> Pode representar mais de 1 milhão de caracteres.</li>
+                        <li><strong>Conteúdo:</strong> Inclui todos os caracteres de todos os idiomas conhecidos, além de emojis e símbolos diversos.</li>
+                        <li><strong>Vantagem:</strong> Padrão global da internet. É <strong>retrocompatível</strong> com ASCII.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Tabela Comparativa: ASCII vs. UTF-8</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>ASCII</th>
+                        <th>UTF-8</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Tamanho por Caractere</strong></td>
+                        <td>Fixo: 1 byte</td>
+                        <td class="highlight">Variável: 1 a 4 bytes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conjunto de Caracteres</strong></td>
+                        <td>Limitado (~128-256)</td>
+                        <td class="highlight">Universal (+140.000 e crescendo)</td>
+                    </tr>
+                     <tr>
+                        <td><strong>Suporte a Idiomas</strong></td>
+                        <td>Apenas Inglês e símbolos básicos</td>
+                        <td class="highlight">Todos os idiomas do mundo</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Uso de Espaço</strong></td>
+                        <td>Eficiente para texto em inglês</td>
+                        <td class="highlight">Eficiente: texto em inglês usa 1 byte (como ASCII)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Compatibilidade</strong></td>
+                        <td>-</td>
+                        <td class="highlight">100% compatível com ASCII</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <button id="prev" class="nav-arrow">◄</button>
+    <button id="next" class="nav-arrow">►</button>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const next = document.getElementById('next');
+        const prev = document.getElementById('prev');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active', 'prev');
+                if (i === index) {
+                    slide.classList.add('active');
+                } else if (i < index) {
+                   slide.classList.add('prev');
+                }
+            });
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            let nextIndex = currentSlide + 1;
+            if (nextIndex >= slides.length) {
+                nextIndex = 0; // Volta para o primeiro
+            }
+            showSlide(nextIndex);
+        }
+
+        function prevSlide() {
+            let prevIndex = currentSlide - 1;
+            if (prevIndex < 0) {
+                prevIndex = slides.length - 1; // Vai para o último
+            }
+            showSlide(prevIndex);
+        }
+
+        next.addEventListener('click', nextSlide);
+        prev.addEventListener('click', prevSlide);
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Inicia no primeiro slide
+        showSlide(0);
+    </script>
+</body>
+</html>
